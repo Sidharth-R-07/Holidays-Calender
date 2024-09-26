@@ -26,25 +26,24 @@ class _CustomCalenderState extends ConsumerState<CustomCalender> {
       focusedDay: _focusedDay,
       calendarFormat: _calendarFormat,
       currentDay: DateTime.now(),
-      headerStyle: const HeaderStyle(
-        formatButtonVisible: false,
-        titleCentered: true,
-      ),
+      headerStyle:
+          const HeaderStyle(formatButtonVisible: false, titleCentered: true),
       calendarStyle: CalendarStyle(
         todayDecoration: BoxDecoration(
           color: Colors.green,
           borderRadius: BorderRadius.circular(8),
         ),
         cellPadding: const EdgeInsets.all(4),
-        holidayDecoration: BoxDecoration(
-          color: Colors.indigoAccent,
+        selectedDecoration: BoxDecoration(
+          color: Colors.indigo,
           borderRadius: BorderRadius.circular(8),
         ),
       ),
+
       selectedDayPredicate: (day) {
         return isSameDay(_selectedDay, day);
       },
-
+      holidayPredicate: (day) => DateTime.sunday == day.weekday,
       onDaySelected: (selectedDay, focusedDay) {
         log("ON SELECTED DAY: $selectedDay");
         if (!isSameDay(_selectedDay, selectedDay)) {
@@ -77,8 +76,8 @@ class _CustomCalenderState extends ConsumerState<CustomCalender> {
           return Center(
             child: Container(
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
                 color: Colors.redAccent,
+                borderRadius: BorderRadius.circular(8),
               ),
               padding: const EdgeInsets.all(10),
               child: Text(

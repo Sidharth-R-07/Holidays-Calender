@@ -32,12 +32,16 @@ class ShowHolidayBottomSheet extends ConsumerWidget {
               ],
             ),
             const Gap(20),
+            Divider(
+              color: Colors.grey.shade200,
+            ),
+            const Gap(20),
             holidayState.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               data: (holidays) {
                 if (holidays.isEmpty) {
                   return const SizedBox(
-                    height: 200,
+                    height: 150,
                     child: Center(
                       child: Text(
                         'No holidays found for the selected day!',
@@ -50,21 +54,19 @@ class ShowHolidayBottomSheet extends ConsumerWidget {
                     ),
                   );
                 }
+
                 return SizedBox(
-                  height: 200,
+                  height: 150,
                   child: ListView.builder(
                     itemCount: holidays.length,
                     itemBuilder: (context, index) {
                       final holiday = holidays[index];
-                      return ListTile(
-                        title: Text(
-                          holiday['name'],
-                          style: const TextStyle(
+                      return Text(
+                        holiday['name'],
+                        style: TextStyle(
                             fontSize: 28,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        subtitle: Text(holiday['date']),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.indigo.shade700),
                       );
                     },
                   ),
